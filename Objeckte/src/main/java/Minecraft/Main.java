@@ -11,5 +11,6 @@ public class Main {
         System.out.println(testcreeper.hp);
         player.hit(testcreeper);
         System.out.println(testcreeper.hp);
+        Map map = new Map(11);
     }
 }
