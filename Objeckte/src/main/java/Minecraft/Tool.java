@@ -2,13 +2,12 @@ package Minecraft;
 
 public class Tool extends Item {
 
-    String material;
+    String name;
 
     int Halbarkeit;
 
-    public Tool(int dmg, String material){
+    public Tool(int dmg){
         this.dmg = dmg;
-        this.material = material;
         maxStack = 1;
     }
 }

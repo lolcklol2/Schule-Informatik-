@@ -4,13 +4,11 @@ public class Main {
     public static void main(String[] args) {
         MinecraftWelt welt = MinecraftWelt.getWelt();
         Player player = welt.player;
-        player.setWohnung(10,20, welt.findBiom(10,20));
-        player.hotbar[0] = new Tool(2,"test");
+        player.hotbar[0] = new Tool(4);
         player.selecteditem(0);
-        Creeper testcreeper = new Creeper();
-        System.out.println(testcreeper.hp);
-        player.hit(testcreeper);
-        System.out.println(testcreeper.hp);
-        Map map = new Map(11);
+        Creeper creeper = new Creeper();
+        System.out.println(creeper.hp);
+        player.hit(creeper);
+        System.out.println(creeper.hp);
     }
 }
