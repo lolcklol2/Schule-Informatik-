@@ -10,5 +10,6 @@ public class Main {
         System.out.println(creeper.hp);
         player.hit(creeper);
         System.out.println(creeper.hp);
+        Map map = new Map(welt.seed);
     }
 }
