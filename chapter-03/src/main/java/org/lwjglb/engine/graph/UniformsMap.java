@@ -31,4 +31,19 @@ public class UniformsMap {
             glUniformMatrix4fv(location.intValue(), false, value.get(stack.mallocFloat(16)));
         }
     }
+    private int getUniformLocation(String uniformName){
+        Integer location = uniforms.get(uniformName);
+        if(location == null){
+            throw new RuntimeException("Could not find uniform [" + uniformName + "]");
+        }
+        return location.intValue();
+    }
+    public void setUniform(String uniformName, int value){
+        glUniform1i(getUniformLocation(uniformName), value);
+    }
+    public void setUniforms(String uniformName, Matrix4f value) {
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            glUniformMatrix4fv(getUniformLocation(uniformName), false, value.get(stack.mallocFloat(16)));
+        }
+    }
 }

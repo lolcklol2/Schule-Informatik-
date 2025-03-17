@@ -43,6 +43,15 @@ public class SceneRender {
             List<Entity> entities = model.getEntitiesList();
             for (Material material : model.getMaterialList()){
                Texture texture = textureCache.getTexture(material.getTexturePath());
+               glActiveTexture(GL_TEXTURE0);
+               texture.bind();
+               for (Mesh mesh: material.getMeshList()){
+                   glBindVertexArray(mesh.getVaoId());
+                   for (Entity entity : entities){
+                       uniformsMap.setUniform("modelMatrix", entity.getModelMatrix());
+                       glDrawElements(GL_TRIANGLES, mesh.getNumVertices(), GL_UNSIGNED_INT, 0);
+                   }
+               }
             }
         }
         glBindVertexArray(0);
