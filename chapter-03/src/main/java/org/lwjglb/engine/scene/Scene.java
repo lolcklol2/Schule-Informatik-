@@ -1,5 +1,6 @@
 package org.lwjglb.engine.scene;
 
+import org.lwjglb.engine.IGUIInstance;
 import org.lwjglb.engine.graph.Model;
 import org.lwjglb.engine.graph.Model;
 import org.lwjglb.engine.graph.TextureCache;
@@ -12,12 +13,19 @@ public class Scene {
     private Projection projection;
     private TextureCache textureCache;
     private Camera camera;
+    private IGUIInstance guiInstance;
 
     public Scene(int width, int height) {
         camera = new Camera();
         modelMap = new HashMap<>();
         projection = new Projection(width, height);
         textureCache = new TextureCache();
+    }
+    public IGUIInstance getGuiInstance(){
+        return guiInstance;
+    }
+    public void setGUIInstance(IGUIInstance guiInstance){
+        this.guiInstance = guiInstance;
     }
     public TextureCache getTextureCache(){
         return textureCache;
