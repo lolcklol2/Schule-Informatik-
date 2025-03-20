@@ -4,7 +4,9 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjglb.engine.*;
 import org.lwjglb.engine.graph.*;
+import org.lwjglb.engine.scene.Camera;
 import org.lwjglb.engine.scene.Entity;
+import org.lwjglb.engine.scene.ModelLoader;
 import org.lwjglb.engine.scene.Scene;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.Vector;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Main implements IAppLogic {
+    private static final float MOVENT_SPEED = 0.005f;
     private Entity cubeEntity;
     private Entity cubeEntity2;
     private Vector4f displInc = new Vector4f();
@@ -32,6 +35,12 @@ public class Main implements IAppLogic {
 
     @Override
     public void init(Window window, Scene scene, Render render) {
+        Model cubeModel = ModelLoader.loadModel("cube-model", "resources/Models/cube.obj", scene.getTextureCache());
+        scene.addModel(cubeModel);
+        cubeEntity = new Entity("cubeEntity", cubeModel.getId());
+        cubeEntity.setPosition(0,0,-2);
+        scene.addEntity(cubeEntity);
+        /*
         float[] positions = new float[]{
                 // V0
                 -0.5f, 0.5f, 0.5f,
@@ -123,7 +132,7 @@ public class Main implements IAppLogic {
                 7,6,4,7,4,5,
 
         };
-         */
+
         int[] indices = new int[]{
                 // Front face
                 0, 1, 3, 3, 1, 2,
@@ -151,15 +160,33 @@ public class Main implements IAppLogic {
         cubeEntity = new Entity("cube-entity", cubeModel.getId());
         cubeEntity.setPosition(0, 0, -2);
         scene.addEntity(cubeEntity);
+        */
     }
 
     @Override
     public void input(Window window, Scene scene, long diffTimeMillis) {
+        float move = diffTimeMillis * MOVENT_SPEED;
+        Camera camera = scene.getCamera();
+        if (window.isKeyPressed(GLFW_KEY_W)) {
+            camera.moveForward(move);
+        } else if (window.isKeyPressed(GLFW_KEY_S)) {
+            camera.moveBackwards(move);
+        }
+        if (window.isKeyPressed(GLFW_KEY_A)) {
+            camera.moveLeft(move);
+        } else if (window.isKeyPressed(GLFW_KEY_D)) {
+            camera.moveRight(move);
+        }
+        if (window.isKeyPressed(GLFW_KEY_SPACE)) {
+            camera.moveUp(move);
+        } else if (window.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
+            camera.moveDown(move);
+        }
     }
 
     @Override
     public void update(Window window, Scene scene, long diffTimeMillis) {
-        rotation += 1.5;
+        rotation += 0;
         if (rotation> 360){
             rotation = 0;
         }

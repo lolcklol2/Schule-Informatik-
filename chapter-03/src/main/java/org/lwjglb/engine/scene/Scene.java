@@ -11,8 +11,10 @@ public class Scene {
     private Map<String, Model> modelMap;
     private Projection projection;
     private TextureCache textureCache;
+    private Camera camera;
 
     public Scene(int width, int height) {
+        camera = new Camera();
         modelMap = new HashMap<>();
         projection = new Projection(width, height);
         textureCache = new TextureCache();
@@ -44,5 +46,9 @@ public class Scene {
     }
     public void resize(int width, int height){
         projection.updateProMatrix(width, height);
+    }
+
+    public Camera getCamera() {
+        return camera;
     }
 }

@@ -25,6 +25,8 @@ public class SceneRender {
         uniformsMap.createUniform("modelMatrix");
         uniformsMap.createUniform("projectionMatrix");
         uniformsMap.createUniform("txtSampler");
+        uniformsMap.createUniform("viewMatrix");
+        uniformsMap.createUniform("material.diffuse");
     }
 
     public void cleanup() {
@@ -35,6 +37,7 @@ public class SceneRender {
     public void render(Scene scene) {
         shaderProgram.bind();
         uniformsMap.setUniform("projectionMatrix", scene.getProjection().getProjMatrix());
+        uniformsMap.setUniform("viewMatrix", scene.getCamera().getViewMatirx());
         uniformsMap.setUniform("txtSampler", 0);
 
         Collection<Model> models = scene.getModelMap().values();
@@ -42,6 +45,7 @@ public class SceneRender {
         for (Model model : models){
             List<Entity> entities = model.getEntitiesList();
             for (Material material : model.getMaterialList()){
+                uniformsMap.setUniform("material.diffuse", material.getDiffuseColor());
                Texture texture = textureCache.getTexture(material.getTexturePath());
                glActiveTexture(GL_TEXTURE0);
                texture.bind();
