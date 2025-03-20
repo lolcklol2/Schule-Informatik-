@@ -3,7 +3,7 @@ package org.lwjglb.engine.graph;
 import java.util.*;
 
 public class TextureCache {
-    public static final String DEFAULT_TEXTURE = "";
+    public static final String DEFAULT_TEXTURE = "resources/texture/default_texture.png";
     private Map<String, Texture> textureFilePathMap;
 
     public TextureCache(){

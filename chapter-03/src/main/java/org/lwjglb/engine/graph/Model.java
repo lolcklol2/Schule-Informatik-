@@ -17,7 +17,7 @@ public class Model {
         entitiesList = new ArrayList<>();
     }
     public void cleanup(){
-        materialList.forEach(Mesh::cleanup);
+        materialList.forEach(Material::cleanup);
     }
     public List<Entity> getEntitiesList(){
         return entitiesList;
